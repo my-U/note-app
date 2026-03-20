@@ -1,0 +1,5 @@
+Dockerfile # 애플리케이션 실행에 불필요. 이미지 안에 있을 이유 없음
+.dockerignore # 마찬가지로 빌드 설정 파일이라 이미지에 포함 불필요
+node_modules # 로컬 환경의 node_modules를 그대로 복사하면 OS/아키텍처 불일치 문제 발생. Dockerfile 안에서 npm install로 컨테이너 환경에 맞게 새로 설치해야 함
+npm-debug.log # 디버그 로그는 이미지에 포함할 필요 없음
+dist # Dockerfile 안에서 tsc로 새로 빌드해야 컨테이너 환경 기준의 정확한 빌드가 보장됨
