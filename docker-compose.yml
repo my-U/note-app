@@ -1,0 +1,32 @@
+version: '3.8'
+services: # 생성되는 순서 중요
+
+  # Backend 애플리케이션
+  backend:
+    build: .
+    container_name: nest-note-app
+    ports:
+      - "9090:9090"
+    environment:
+      DB_HOST: mysql # compose 에서 컨테이너끼리 통신할 때는 서비스 이름으로 접속
+      DB_DATABASE: nest_note_db
+      DB_USERNAME: ${NEST_NOTE_APP_DB_USERNAME}
+      DB_PASSWORD: ${NEST_NOTE_APP_DB_PASSWORD}
+    depends_on: # 작성 순서 상관없이 depends_on에 명시된 서비스 먼저 실행
+      - mysql
+
+  mysql:
+    image: mysql:8.0
+    container_name: note-mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${NEST_NOTE_APP_DB_PASSWORD}
+      MYSQL_DATABASE: nest_note_db
+    volumes:
+      # mysql_data : 볼륨 이름(Docker가 관리하는 저장 공간)
+      # Docker가 알아서 서버에 경로 생성, 저장 관리
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data: # 이 볼륨을 Docker가 관리하겠다고 선언
