@@ -8,10 +8,10 @@ services: # 생성되는 순서 중요
     ports:
       - "9999:9999"
     environment:
-      DB_HOST: mysql # compose 에서 컨테이너끼리 통신할 때는 서비스 이름으로 접속
-      DB_DATABASE: nest_note_db
-      DB_USERNAME: ${NEST_NOTE_APP_DB_USERNAME}
-      DB_PASSWORD: ${NEST_NOTE_APP_DB_PASSWORD}
+      MYSQL_HOST: mysql # compose 에서 컨테이너끼리 통신할 때는 서비스 이름으로 접속
+      MYSQL_DATABASE: nest_note_db
+      MYSQL_USERNAME: ${NEST_NOTE_APP_DB_USERNAME}
+      MYSQL_PASSWORD: ${NEST_NOTE_APP_DB_PASSWORD}
     depends_on: # 작성 순서 상관없이 depends_on에 명시된 서비스 먼저 실행
       - mysql
 
