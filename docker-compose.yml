@@ -6,7 +6,7 @@ services: # 생성되는 순서 중요
     build: . # 처음에 이미지가 없을 때만 빌드. 이미지가 이미 있으면 기존 이미지 사용
     container_name: nest-note-app
     ports:
-      - "9090:9090"
+      - "9999:9999"
     environment:
       DB_HOST: mysql # compose 에서 컨테이너끼리 통신할 때는 서비스 이름으로 접속
       DB_DATABASE: nest_note_db
