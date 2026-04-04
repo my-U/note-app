@@ -3,7 +3,7 @@ services: # 생성되는 순서 중요
 
   # Backend 애플리케이션
   backend:
-    build: .
+    build: . # 처음에 이미지가 없을 때만 빌드. 이미지가 이미 있으면 기존 이미지 사용
     container_name: nest-note-app
     ports:
       - "9090:9090"
