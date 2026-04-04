@@ -35,8 +35,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 // docker stop note-app || true 해당 컨테이너가 없으면 오류 발생. 
-                sh 'docker-compose down'
-                sh 'docker-compose up -d --build'
+                sh 'docker compose down'
+                sh 'docker compose up -d --build'
             }
         }
     }
