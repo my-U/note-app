@@ -4,6 +4,7 @@ pipeline {
     environment {
             NEST_NOTE_APP_DB_USERNAME = credentials('NEST_NOTE_APP_DB_USERNAME')
             NEST_NOTE_APP_DB_PASSWORD = credentials('NEST_NOTE_APP_DB_PASSWORD')
+            JWT_SECRET = credentials('JWT_SECRET')
         }
 
     stages {
