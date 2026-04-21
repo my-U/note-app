@@ -1,9 +1,12 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import {DocumentBuilder, SwaggerModule} from "@nestjs/swagger";
+import {AllExceptionsFilter} from "./common/filter/all-exceptions.filter";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  // 전역 예외 필터 등록 - 처리되지 않은 모든 예외를 잡아 에러 로그와 스택 트레이스를 출력
+  app.useGlobalFilters(new AllExceptionsFilter());
 
   // Swagger 설정
   const config = new DocumentBuilder()

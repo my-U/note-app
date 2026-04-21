@@ -1,10 +1,11 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { MemoController } from './memo/controller/memo.controller';
 import { MemoService } from './memo/service/memo.service';
 import {TypeOrmModule} from "@nestjs/typeorm";
 import {ConfigModule} from "@nestjs/config";
 import {MemoModule} from "./memo/memo.module";
 import {AuthModule} from "./auth/auth.module";
+import {LoggingMiddleware} from "./common/middleware/logging.middleware";
 
 @Module({
   imports: [
@@ -23,4 +24,10 @@ import {AuthModule} from "./auth/auth.module";
       AuthModule // auth.module.ts 등록
   ],
 })
-export class AppModule {}
+// NestModule을 구현하면 configure()에서 미들웨어를 등록할 수 있음
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    // 모든 라우트('*')에 LoggingMiddleware 적용
+    consumer.apply(LoggingMiddleware).forRoutes('*');
+  }
+}
