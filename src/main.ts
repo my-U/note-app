@@ -18,14 +18,14 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('swagger-memo', app, document); // /swagger-memo 경로로 접속
 
-  await app.listen(process.env.PORT ?? 9999);
-
   // CORS 설정 - 허용할 출처(origin), HTTP 메서드, 헤더를 정의
   app.enableCors({
     origin: process.env.CORS_ORIGIN,   // 허용할 프론트엔드 주소 (필요에 따라 변경)
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], // 허용할 HTTP 메서드
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'], // 허용할 HTTP 메서드 (OPTIONS: preflight 요청 허용)
     allowedHeaders: ['Content-Type', 'Authorization'],  // 허용할 요청 헤더
     credentials: true,                 // 쿠키/인증 헤더 포함 요청 허용
   });
+
+  await app.listen(process.env.PORT ?? 9999);
 }
 bootstrap();
